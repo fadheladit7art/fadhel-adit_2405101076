@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warung Pras – Toko Rokok Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style css website.css">
+</head>
+<body>
+
+  <!-- Verifikasi usia -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-box">
+      <h2 id="gate-title">Khusus usia 18 tahun ke atas</h2>
+      <p>Produk di toko ini hanya boleh dibeli oleh perokok dewasa. Apakah usia Anda sudah 18 tahun atau lebih?</p>
+      <div class="gate-actions">
+        <button class="btn" id="gate-yes">Ya, saya 18+</button>
+        <button class="btn ghost" id="gate-no">Belum</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="#">Warung Pras</a>
+    <nav>
+      <a href="#produk">Produk</a>
+      <a href="#cara-pesan">Cara pesan</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <button class="cart-btn" id="open-cart" aria-label="Buka keranjang">
+      Keranjang <span id="cart-count">0</span>
+    </button>
+  </header>
+
+  <section class="hero">
+    <h1>Kretek, filter, dan cerutu pilihan. Diantar sampai rumah.</h1>
+    <p>Stok segar langsung dari distributor. Pesan lewat keranjang, selesaikan lewat WhatsApp.</p>
+    <a class="btn" href="#produk">Lihat produk</a>
+  </section>
+
+  <main>
+    <section id="produk" class="section">
+      <h2>Produk</h2>
+      <div class="tools">
+        <input type="search" id="search" placeholder="Cari nama produk…" aria-label="Cari produk">
+        <div class="filters" id="filters">
+          <button class="chip active" data-cat="semua">Semua</button>
+          <button class="chip" data-cat="kretek">Kretek</button>
+          <button class="chip" data-cat="filter">Filter</button>
+          <button class="chip" data-cat="cerutu">Cerutu</button>
+          <button class="chip" data-cat="linting">Tembakau linting</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>Produk tidak ditemukan. Coba kata kunci lain.</p>
+    </section>
+
+    <section id="cara-pesan" class="section steps">
+      <h2>Cara pesan</h2>
+      <ol>
+        <li>Pilih produk dan tambahkan ke keranjang.</li>
+        <li>Isi nama dan alamat di keranjang.</li>
+        <li>Tekan “Pesan via WhatsApp”. Pesanan terkirim ke penjual.</li>
+        <li>Bayar dan terima barang. Kurir akan memeriksa KTP pembeli.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer id="kontak">
+    <p class="warning">PERINGATAN: Merokok membunuhmu. Merokok dapat menyebabkan kanker, serangan jantung, impotensi, dan gangguan kehamilan dan janin. Dilarang menjual kepada anak di bawah 18 tahun.</p>
+    <p>Warung Tembakau · WhatsApp 0858-1232-5801 · Madiun, Jawa Timur</p>
+  </footer>
+
+  <!-- Keranjang -->
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Keranjang belanja" aria-hidden="true">
+    <div class="drawer-head">
+      <h3>Keranjang</h3>
+      <button class="close" id="close-cart" aria-label="Tutup keranjang">&times;</button>
+    </div>
+    <ul class="cart-list" id="cart-list"></ul>
+    <p class="empty" id="cart-empty">Keranjang masih kosong. Pilih produk dulu.</p>
+    <div class="drawer-foot" id="cart-foot">
+      <div class="total"><span>Total</span><strong id="cart-total">Rp0</strong></div>
+      <label>Nama <input type="text" id="buyer-name" placeholder="Nama lengkap"></label>
+      <label>Alamat <textarea id="buyer-addr" rows="2" placeholder="Alamat pengiriman"></textarea></label>
+      <button class="btn block" id="checkout">Pesan via WhatsApp</button>
+      <button class="btn ghost block" id="clear-cart">Kosongkan keranjang</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

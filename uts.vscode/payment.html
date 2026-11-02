@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pembayaran – Warung Pras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pay.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">Warung Tembakau</a>
+    <a class="back" href="index.html">&larr; Kembali ke toko</a>
+  </header>
+
+  <main class="pay-wrap">
+    <h1>Pembayaran</h1>
+
+    <!-- Pesan bila belum login / keranjang kosong / usia tidak memenuhi -->
+    <div class="state" id="state" hidden></div>
+
+    <!-- Form pembayaran -->
+    <div class="checkout" id="checkout-view" hidden>
+      <form id="pay-form" novalidate>
+        <p class="msg error" id="msg" role="alert" hidden></p>
+
+        <fieldset>
+          <legend>1. Data penerima</legend>
+          <label>Nama penerima <input type="text" id="p-name" autocomplete="name" required></label>
+          <label>Nomor HP / WhatsApp <input type="tel" id="p-phone" placeholder="08123456789" autocomplete="tel" required></label>
+          <label>Alamat lengkap <textarea id="p-addr" rows="2" autocomplete="street-address" required></textarea></label>
+          <div class="row">
+            <label>Kota <input type="text" id="p-city" required></label>
+            <label>Kode pos <input type="text" id="p-zip" inputmode="numeric" maxlength="5" required></label>
+          </div>
+          <label>Catatan untuk kurir (opsional) <input type="text" id="p-note"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Pengiriman</legend>
+          <label class="opt"><input type="radio" name="ship" value="reguler" checked>
+            <span><b>Reguler</b> · 2–4 hari<small>Rp15.000</small></span></label>
+          <label class="opt"><input type="radio" name="ship" value="ekspres">
+            <span><b>Ekspres</b> · 1 hari<small>Rp30.000</small></span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Metode pembayaran</legend>
+          <label class="opt"><input type="radio" name="method" value="transfer">
+            <span><b>Transfer bank</b><small>BCA, BRI, atau Mandiri. Bayar dalam 24 jam.</small></span></label>
+          <label class="opt"><input type="radio" name="method" value="qris">
+            <span><b>QRIS</b><small>Scan dengan e-wallet atau m-banking apa saja.</small></span></label>
+          <label class="opt"><input type="radio" name="method" value="cod">
+            <span><b>Bayar di tempat (COD)</b><small>Bayar tunai ke kurir saat barang tiba.</small></span></label>
+        </fieldset>
+
+        <label class="check agree">
+          <input type="checkbox" id="p-agree">
+          <span>Saya berusia 21 tahun ke atas dan bersedia menunjukkan KTP asli kepada kurir saat barang diterima.</span>
+        </label>
+
+        <button class="btn block" type="submit" id="pay-btn">Buat pesanan</button>
+        <p class="note">Peringatan: merokok membunuhmu. Produk tembakau dilarang dijual kepada anak di bawah usia 21 tahun.</p>
+      </form>
+
+      <aside class="summary" aria-label="Ringkasan pesanan">
+        <h2>Ringkasan pesanan</h2>
+        <ul id="sum-items"></ul>
+        <dl>
+          <div><dt>Subtotal</dt><dd id="sum-sub"></dd></div>
+          <div><dt>Ongkos kirim</dt><dd id="sum-ship"></dd></div>
+          <div class="grand"><dt>Total</dt><dd id="sum-total"></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <!-- Konfirmasi setelah pesanan dibuat -->
+    <section class="done" id="done-view" hidden>
+      <p class="msg ok">Pesanan berhasil dibuat. Simpan nomor pesanan Anda.</p>
+      <h2>Nomor pesanan: <span id="d-id"></span></h2>
+      <p>Total yang harus dibayar: <strong id="d-total"></strong></p>
+      <div id="d-instr"></div>
+      <a class="btn block" id="d-wa" target="_blank" rel="noopener">Konfirmasi via WhatsApp</a>
+      <a class="btn ghost block" href="index.html">Kembali ke toko</a>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="pay.js"></script>
+</body>
+</html>
