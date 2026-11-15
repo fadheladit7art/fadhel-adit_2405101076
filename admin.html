@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin – Warung Pras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/CSS/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">Warung Pras <span class="tag">Admin</span></a>
+    <button class="btn ghost small" id="logout" hidden>Keluar</button>
+  </header>
+
+  <main class="adm">
+
+    <!-- Masuk / buat kata sandi -->
+    <section class="adm-auth" id="auth">
+      <p class="adm-msg" id="auth-msg" role="alert" hidden></p>
+
+      <form id="setup-form" hidden>
+        <h1>Buat kata sandi admin</h1>
+        <p class="muted">Pertama kali dipakai. Kata sandi ini hanya berlaku di browser ini.</p>
+        <label>Kata sandi baru <input type="password" id="s-pass" autocomplete="new-password" required></label>
+        <label>Ulangi kata sandi <input type="password" id="s-pass2" autocomplete="new-password" required></label>
+        <button class="btn block" type="submit">Simpan dan masuk</button>
+      </form>
+
+      <form id="login-form" hidden>
+        <h1>Masuk admin</h1>
+        <label>Kata sandi <input type="password" id="l-pass" autocomplete="current-password" required></label>
+        <button class="btn block" type="submit">Masuk</button>
+      </form>
+    </section>
+
+    <!-- Dasbor -->
+    <section id="app" hidden>
+      <h1>Pesanan masuk</h1>
+      <div class="stats" id="stats"></div>
+
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Cari nomor pesanan atau nama…" aria-label="Cari pesanan">
+        <div class="filters" id="filters"></div>
+        <div class="tool-btns">
+          <button class="btn ghost small" id="reload">Muat ulang</button>
+          <button class="btn small" id="export">Ekspor CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pesanan</th><th>Pembeli</th><th>Total</th><th>Bayar</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="muted" id="empty" hidden>Belum ada pesanan yang cocok.</p>
+
+      <p class="note">Catatan: halaman ini hanya menampilkan pesanan yang dibuat di <b>browser ini</b>. Pesanan dari perangkat pembeli lain tidak muncul di sini; untuk itu dibutuhkan server dan database.</p>
+
+      <details class="pw">
+        <summary>Ganti kata sandi admin</summary>
+        <form id="pw-form">
+          <label>Kata sandi lama <input type="password" id="p-old" autocomplete="current-password" required></label>
+          <label>Kata sandi baru <input type="password" id="p-new" autocomplete="new-password" required></label>
+          <button class="btn small" type="submit">Simpan</button>
+          <p class="adm-msg" id="pw-msg" role="alert" hidden></p>
+        </form>
+      </details>
+    </section>
+  </main>
+
+  <!-- Detail pesanan -->
+  <dialog id="dlg">
+    <div class="dlg-head"><h2 id="dlg-title"></h2><button class="close" id="dlg-close" aria-label="Tutup">&times;</button></div>
+    <div id="dlg-body"></div>
+    <div class="dlg-foot">
+      <a class="btn small" id="dlg-wa" target="_blank" rel="noopener">Hubungi pembeli (WhatsApp)</a>
+      <button class="btn ghost small danger" id="dlg-del">Hapus pesanan</button>
+    </div>
+  </dialog>
+
+  <script src="assets/Java/Data.js"></script>
+  <script src="assets/Java/admin.js"></script>
+</body>
+</html>

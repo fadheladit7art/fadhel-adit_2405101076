@@ -7,86 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="auth.css">
-</head>
-<body>
-  <header class="top">
-    <a class="brand" href="index.html">Warung Pras</a>
-    <a class="back" href="index.html">&larr; Kembali ke toko</a>
-  </header>
-
-  <main class="auth">
-    <section class="auth-box">
-
-      <!-- Tampilan bila sudah masuk -->
-      <div id="signed-in" hidden>
-        <h1>Halo, <span id="user-name"></span></h1>
-        <p id="user-email" class="muted"></p>
-        <a class="btn block" href="index.html">Lanjut belanja</a>
-        <button class="btn ghost block" id="logout">Keluar</button>
-      </div>
-
-      <!-- Tampilan form -->
-      <div id="forms">
-        <h1>Akun pembeli</h1>
-        <div class="tabs" role="tablist">
-          <button role="tab" class="tab active" id="tab-login" aria-selected="true" aria-controls="form-login">Masuk</button>
-          <button role="tab" class="tab" id="tab-register" aria-selected="false" aria-controls="form-register">Daftar</button>
-        </div>
-
-        <p class="msg" id="msg" role="alert" hidden></p>
-
-        <form id="form-login" novalidate>
-          <label>Email
-            <input type="email" id="l-email" autocomplete="email" required>
-          </label>
-          <label>Kata sandi
-            <input type="password" id="l-pass" autocomplete="current-password" required>
-          </label>
-          <label class="check"><input type="checkbox" class="show-pass"> Tampilkan kata sandi</label>
-          <button class="btn block" type="submit">Masuk</button>
-        </form>
-
-        <form id="form-register" novalidate hidden>
-          <label>Nama lengkap
-            <input type="text" id="r-name" autocomplete="name" required>
-          </label>
-          <label>Email
-            <input type="email" id="r-email" autocomplete="email" required>
-          </label>
-          <label>Tanggal lahir
-            <input type="date" id="r-dob" required>
-            <small>Pembeli harus berusia minimal 21 tahun.</small>
-          </label>
-          <label>Kata sandi
-            <input type="password" id="r-pass" autocomplete="new-password" minlength="8" required>
-            <small>Minimal 8 karakter, mengandung huruf dan angka.</small>
-          </label>
-          <label>Ulangi kata sandi
-            <input type="password" id="r-pass2" autocomplete="new-password" required>
-          </label>
-          <label class="check"><input type="checkbox" class="show-pass"> Tampilkan kata sandi</label>
-          <button class="btn block" type="submit">Buat akun</button>
-        </form>
-
-        <p class="note">Peringatan: produk tembakau hanya untuk usia 21 tahun ke atas. Identitas pembeli akan diperiksa saat barang diterima.</p>
-      </div>
-    </section>
-  </main>
-
-  <script src="auth.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Masuk – Warung Pras</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/CSS/style.css">
 </head>
 <body>
@@ -97,6 +17,33 @@
 
   <main class="auth">
     <section class="auth-box">
+
+      <!-- Pilih peran -->
+      <div class="roles" role="group" aria-label="Masuk sebagai">
+        <button type="button" class="role active" data-role="pembeli" aria-pressed="true"><b>Pembeli</b><small>Belanja dan bayar pesanan</small></button>
+        <button type="button" class="role" data-role="admin" aria-pressed="false"><b>Admin</b><small>Kelola pesanan toko</small></button>
+      </div>
+
+      <!-- Kotak masuk admin -->
+      <div id="admin-box" hidden>
+        <h1>Masuk admin</h1>
+        <p class="msg error" id="adm-msg" role="alert" hidden></p>
+        <div id="adm-none" hidden>
+          <p class="muted">Belum ada kata sandi admin di browser ini.</p>
+          <a class="btn block" href="admin.html">Buat kata sandi admin</a>
+        </div>
+        <div id="adm-already" hidden>
+          <p class="muted">Anda sudah masuk sebagai admin.</p>
+          <a class="btn block" href="admin.html">Buka dasbor admin</a>
+        </div>
+        <form id="adm-form" novalidate>
+          <label>Kata sandi admin
+            <input type="password" id="adm-pass" autocomplete="current-password" required>
+          </label>
+          <label class="check"><input type="checkbox" id="adm-show"> Tampilkan kata sandi</label>
+          <button class="btn block" type="submit">Masuk sebagai admin</button>
+        </form>
+      </div>
 
       <!-- Tampilan bila sudah masuk -->
       <div id="signed-in" hidden>
@@ -155,5 +102,6 @@
   </main>
 
   <script src="assets/Java/auth.js"></script>
+  <script src="assets/Java/role.js"></script>
 </body>
 </html>

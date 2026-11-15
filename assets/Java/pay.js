@@ -120,7 +120,7 @@ function showDone(o) {
       "<p>Setelah transfer, kirim bukti pembayaran lewat WhatsApp.</p>";
   } else if (o.metode === "qris") {
     instr = '<p>Scan kode QRIS toko, lalu bayar <b>tepat ' + rupiah(o.total) + "</b>.</p>" +
-      '<img class="qris-img" id="qris-img" src="' + esc(QRIS_GAMBAR) + '" alt="Kode QRIS">' + +
+      '<img class="qris-img" id="qris-img" src="' + esc(QRIS_GAMBAR) + '" alt="Kode QRIS">' +
       "<p>Kirim bukti pembayaran lewat WhatsApp.</p>";
   } else {
     instr = "<p>Siapkan uang tunai <b>" + rupiah(o.total) + "</b> (uang pas lebih baik). Kurir akan memeriksa KTP asli Anda. Jika pembeli berusia di bawah 21 tahun atau tidak menunjukkan KTP, pesanan dibatalkan.</p>";
