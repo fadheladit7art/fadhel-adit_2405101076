@@ -1,20 +1,5 @@
-// ====== DATA PRODUK (merek fiktif untuk contoh) ======
-const NOMOR_WA = "6285812325801"; // ganti dengan nomor WhatsApp penjual (format 62...)
+// products, NOMOR_WA, dan rupiah() ada di data.js (dimuat sebelum file ini)
 
-const products = [
-  { id: 1, nama: "Black Matcha",  kategori: "kretek",  isi: "12 batang", harga: 18000, warna: "#74a12e" },
-  { id: 2, nama: "Andalan Baru",  kategori: "kretek",  isi: "16 batang", harga: 12000, warna: "#d4af37" },
-  { id: 3, nama: "Surya Gudang Garam",  kategori: "filter",  isi: "12 batang", harga: 27000, warna: "#5c1619" },
-  { id: 4, nama: "LA Ice Mangoboost", kategori: "filter",  isi: "16 batang", harga: 35000, warna: "#cc5500" },
-  { id: 5, nama: "Urban Mild Watermelon",kategori: "filter",  isi: "16 batang", harga: 23000, warna: "#E8F5E9" },
-  { id: 6, nama: "Sampoerna Mild",   kategori: "filter",  isi: "12 batang", harga: 29000, warna: "#ffffff" },
-  { id: 7, nama: "Dji Sam Soe Magnum",      kategori: "kretek",  isi: "12 batang",  harga: 15600, warna: "#121212" },
-  { id: 8, nama: "Cerutu Atjeh Gayo Classic",kategori: "cerutu", isi: "5 batang",  harga: 149500,warna: "#1e4670" },
-  { id: 9, nama: "Tembakau Linting Shag Heritage Tobacco Vanilla Creme",kategori: "linting",isi: "30 gram", harga: 20000, warna: "#6a6a2e" },
-  { id: 10,nama: "Tembakau Linting Royal Bourbon",kategori: "linting",isi: "50 gram",harga: 42000, warna: "#58502a" },
-];
-
-const rupiah = n => "Rp" + n.toLocaleString("id-ID");
 const $ = id => document.getElementById(id);
 
 let cart = [];
@@ -42,7 +27,7 @@ function renderProducts() {
   );
   $("grid").innerHTML = list.map(p => `
     <article class="card">
-      <div class="pack" style="background:${p.warna}">${p.nama}</div>
+      <img class="pack" src="${p.gambar}" alt="${p.nama}" loading="lazy">
       <div class="card-body">
         <h3>${p.nama}</h3>
         <span class="meta">Isi ${p.isi}</span>
@@ -72,7 +57,10 @@ $("grid").addEventListener("click", e => {
 
 // ====== KERANJANG ======
 function loadCart() {
-  try { cart = JSON.parse(localStorage.getItem("cart") || "[]"); } catch (e) { cart = []; }
+  try {
+    const raw = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart = Array.isArray(raw) ? raw.filter(i => products.some(p => p.id === i.id) && i.qty > 0) : [];
+  } catch (e) { cart = []; }
 }
 function saveCart() {
   try { localStorage.setItem("cart", JSON.stringify(cart)); } catch (e) {}
@@ -131,6 +119,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") toggleCart(f
 
 // ====== CHECKOUT VIA WHATSAPP ======
 $("checkout").addEventListener("click", () => {
+  if (!cart.length) return;
   const nama = $("buyer-name").value.trim();
   const alamat = $("buyer-addr").value.trim();
   if (!nama || !alamat) return toast("Isi nama dan alamat dulu");
@@ -153,6 +142,10 @@ function toast(msg) {
 }
 
 // ====== MULAI ======
+// sembunyikan tombol kategori yang tidak punya produk
+document.querySelectorAll(".chip").forEach(c => {
+  if (c.dataset.cat !== "semua" && !products.some(p => p.kategori === c.dataset.cat)) c.hidden = true;
+});
 loadCart();
 renderProducts();
 renderCart();

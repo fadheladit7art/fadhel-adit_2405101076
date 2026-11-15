@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style css website.css">
+  <link rel="stylesheet" href="assets/CSS/style.css">
 </head>
 <body>
 
@@ -29,6 +29,7 @@
       <a href="#produk">Produk</a>
       <a href="#cara-pesan">Cara pesan</a>
       <a href="#kontak">Kontak</a>
+      <a href="login.html">Masuk</a>
     </nav>
     <button class="cart-btn" id="open-cart" aria-label="Buka keranjang">
       Keranjang <span id="cart-count">0</span>
@@ -87,13 +88,15 @@
       <div class="total"><span>Total</span><strong id="cart-total">Rp0</strong></div>
       <label>Nama <input type="text" id="buyer-name" placeholder="Nama lengkap"></label>
       <label>Alamat <textarea id="buyer-addr" rows="2" placeholder="Alamat pengiriman"></textarea></label>
-      <button class="btn block" id="checkout">Pesan via WhatsApp</button>
+      <a class="btn block" href="payment.html">Lanjut ke pembayaran</a>
+      <button class="btn ghost block" id="checkout">Pesan langsung via WhatsApp</button>
       <button class="btn ghost block" id="clear-cart">Kosongkan keranjang</button>
     </div>
   </aside>
 
   <div class="toast" id="toast" role="status"></div>
 
-  <script src="script.js"></script>
+  <script src="assets/Java/Data.js"></script>
+  <script src="assets/Java/script.js"></script>
 </body>
 </html>
